@@ -1,7 +1,7 @@
 #define GLEW_STATIC
 
 #include <iostream>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <GL/glew.h>
 
 const GLchar* vertexShaderSource = "#version 130\n"
@@ -17,7 +17,7 @@ const GLchar* fragmentShaderSource = "#version 130\n"
     "color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
     "}\n\0";
 
-int main ()
+int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_VIDEO);
 
