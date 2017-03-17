@@ -25,10 +25,15 @@ src/GenericShaderProgram.cpp
 src/GenericShaderProgram.h
 src/Display.cpp
 src/Display.h
+src/util.cpp
 src/util.h)
 include_directories("${PROJECT_SOURCE_DIR}/src")
 
 add_executable(blueshock ${SOURCE_FILES})
+
+add_custom_target(copy_resources ALL
+	COMMAND cmake -E copy_directory ${CMAKE_SOURCE_DIR}/res ${CMAKE_BINARY_DIR}/res
+	DEPENDS ${blueshock})
 
 message("the SDL2 include directory is: ${SDL2_INCLUDE_DIR}")
 message("the GLEW include directory is: ${GLEW_INCLUDE_DIR}")
