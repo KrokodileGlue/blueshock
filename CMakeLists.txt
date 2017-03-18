@@ -17,7 +17,12 @@ find_package(SDL2 REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
-set(SOURCE_FILES src/main.cpp)
+set(SOURCE_FILES
+src/main.cpp
+src/Shader.cpp
+src/Shader.h
+src/GenericShaderProgram.cpp
+src/GenericShaderProgram.h)
 include_directories("${PROJECT_SOURCE_DIR}/src")
 
 add_executable(blueshock ${SOURCE_FILES})
