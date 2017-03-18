@@ -3,34 +3,7 @@
 #include <iostream>
 #include <cstdio>
 
-char* load_file(const char* path)
-{
-	char* buf = NULL;
-	FILE* file = fopen(path, "r");
-
-	if (file) {
-		if (fseek(file, 0L, SEEK_END) == 0) {
-			long len = ftell(file);
-			if (len == -1) return NULL;
-
-			buf = (char*)malloc(len + 1);
-
-			if (fseek(file, 0L, SEEK_SET) != 0)
-				return NULL;
-
-			size_t new_len = fread(buf, 1, len, file);
-			if (ferror(file) != 0) {
-				std::cerr << "shader file could not be read.\n";
-			} else {
-				buf[new_len++] = '\0';
-			}
-		}
-
-		fclose(file);
-	}
-
-	return buf;
-}
+#include "util.h"
 
 void check_gl_shader_error(GLint shader, GLenum shader_type)
 {
