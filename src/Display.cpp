@@ -1,0 +1,41 @@
+#include "Display.h"
+
+Display::Display(int default_width, int default_height)
+{
+	width = default_width, height = default_height;
+	SDL_Init(SDL_INIT_VIDEO);
+
+	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+	win = SDL_CreateWindow("Hello, world!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+		width, height,
+		SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+
+	context = SDL_GL_CreateContext(win);
+	SDL_GL_SetSwapInterval(1);
+
+	glViewport(0, 0, width, height);
+	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+}
+
+Display::~Display()
+{
+	SDL_GL_DeleteContext(context);
+	SDL_DestroyWindow(win);
+	SDL_Quit();
+}
+
+void Display::update()
+{
+	SDL_GL_SwapWindow(win);
+
+	SDL_GetWindowSize(win, &width, &height);
+	glViewport(0, 0, width, height);
+
+	glClear(GL_COLOR_BUFFER_BIT);
+}
