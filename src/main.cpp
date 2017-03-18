@@ -1,21 +1,14 @@
 #define GLEW_STATIC
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
+
 #include <SDL.h>
 #include <GL/glew.h>
 
-const GLchar* vertexShaderSource = "#version 130\n"
-"in vec3 position;\n"
-"void main()\n"
-"{\n"
-"gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
-"}\0";
-const GLchar* fragmentShaderSource = "#version 130\n"
-"out vec4 color;\n"
-"void main()\n"
-"{\n"
-"color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-"}\n\0";
+#include "Shader.h"
+#include "GenericShaderProgram.h"
 
 int main(int argc, char* argv[])
 {
@@ -35,52 +28,12 @@ int main(int argc, char* argv[])
 	glewExperimental = GL_TRUE;
 	glewInit();
 
+	Shader vert_shader("res/shader/vert_shader.txt", GL_VERTEX_SHADER);
+	Shader frag_shader("res/shader/frag_shader.txt", GL_FRAGMENT_SHADER);
+	GenericShaderProgram shader_program(vert_shader, frag_shader);
+
 	int width = 512, height = 512;
 	glViewport(0, 0, width, height);
-
-	// Vertex shader
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
-	
-	// Check for compile time errors
-	GLint success;
-	GLchar infoLog[512];
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-	if (success == GL_FALSE)
-	{
-		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-	
-	// Fragment shader
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);
-	
-	// Check for compile time errors
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-	if (success == GL_FALSE)
-	{
-		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-	
-	// Link shaders
-	GLuint shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-	
-	// Check for linking errors
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-	if (success == GL_FALSE) {
-		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-	}
-
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
 
 	GLfloat vertices[] = {
 		 0.5f,  0.5f, 0.0f,  // Top Right
@@ -114,9 +67,8 @@ int main(int argc, char* argv[])
 
 	SDL_Event e;
 	bool running = true;
-	while (running)
-	{
-		while (SDL_PollEvent(&e) != 0)
+	while (running) {
+		while (SDL_PollEvent(&e))
 			if (e.type == SDL_QUIT) running = false;
 
 		SDL_GetWindowSize(win, &width, &height);
@@ -125,7 +77,7 @@ int main(int argc, char* argv[])
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glUseProgram(shaderProgram);
+		shader_program.bind();
 		glBindVertexArray(VAO);
 
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
