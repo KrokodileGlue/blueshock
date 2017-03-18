@@ -17,10 +17,18 @@ find_package(SDL2 REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
-set(SOURCE_FILES src/main.cpp)
-include_directories("${PROJECT_SOURCE_DIR}/src")
+set(SOURCE_FILES
+	src/main.cpp
+	src/Shader.cpp
+	src/Shader.h)
+include_directories(${PROJECT_SOURCE_DIR}/src)
 
-add_executable(blueshock ${SOURCE_FILES})
+set(RESOURCE_FILES
+	res/shader/vert_shader.txt
+	res/shader/frag_shader.txt
+)
+
+add_executable(blueshock ${SOURCE_FILES} ${RESOURCE_FILES})
 
 message("the SDL2 include directory is: ${SDL2_INCLUDE_DIR}")
 message("the GLEW include directory is: ${GLEW_INCLUDE_DIR}")
@@ -34,5 +42,11 @@ include_directories(${GLEW_INCLUDE_DIR})
 target_link_libraries(blueshock ${SDL2_LIBRARY})
 target_link_libraries(blueshock ${GLEW_LIBRARY})
 target_link_libraries(blueshock ${OPENGL_gl_LIBRARY})
+
+set_target_properties(blueshock PROPERTIES
+	MACOSX_BUNDLE TRUE
+	MACOSX_FRAMEWORK_IDENTIFIER org.cmake.blueshock
+	RESOURCE "${RESOURCE_FILES}"
+)
 
 install (TARGETS blueshock DESTINATION bin)
