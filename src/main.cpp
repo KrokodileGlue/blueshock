@@ -4,6 +4,8 @@
 #include <SDL.h>
 #include <GL/glew.h>
 
+#include "Shader.h"
+
 const GLchar* vertexShaderSource = "#version 130\n"
 "in vec3 position;\n"
 "void main()\n"
