@@ -5,5 +5,6 @@
 #include <cstdio>
 
 char* load_file(const char* path);
+void blueshock_quit();
 
 #endif

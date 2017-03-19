@@ -1,4 +1,5 @@
 #include "util.h"
+#include "Log.h"
 
 char* load_file(const char* path)
 {
@@ -30,4 +31,11 @@ char* load_file(const char* path)
 	}
 
 	return buf;
+}
+
+void blueshock_quit()
+{
+	log(LogLevel::INFO) << "shutting down";
+	dump_log();
+	exit(EXIT_SUCCESS);
 }

@@ -1,7 +1,9 @@
 #include "Display.h"
+#include "Log.h"
 
 Display::Display(int default_width, int default_height)
 {
+	log(LogLevel::INFO) << "initializing SDL";
 	width = default_width, height = default_height;
 	SDL_Init(SDL_INIT_VIDEO);
 
@@ -21,6 +23,8 @@ Display::Display(int default_width, int default_height)
 
 	glViewport(0, 0, width, height);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
+	log(LogLevel::INFO) << "finished initializing SDL";
 }
 
 Display::~Display()
