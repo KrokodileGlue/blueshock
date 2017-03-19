@@ -1,4 +1,4 @@
-#include "GenericShaderProgram.h"
+#include "ShaderProgram.h"
 
 #include <iostream>
 
@@ -16,7 +16,7 @@ void check_gl_shader_program_error(GLint program_id)
 #undef ERROR_LOG_SIZE
 }
 
-GenericShaderProgram::GenericShaderProgram(Shader vert, Shader frag)
+ShaderProgram::ShaderProgram(Shader vert, Shader frag)
 {
 	program_id = glCreateProgram();
 	glAttachShader(program_id, vert.shader_id);
@@ -26,7 +26,7 @@ GenericShaderProgram::GenericShaderProgram(Shader vert, Shader frag)
 	check_gl_shader_program_error(program_id);
 }
 
-GenericShaderProgram::~GenericShaderProgram()
+ShaderProgram::~ShaderProgram()
 {
 
 }

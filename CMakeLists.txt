@@ -19,17 +19,19 @@ find_package(OpenGL REQUIRED)
 
 set(SOURCE_FILES
 src/main.cpp
-src/Shader.cpp
-src/Shader.h
-src/GenericShaderProgram.cpp
-src/GenericShaderProgram.h
-src/Display.cpp
-src/Display.h
+src/render/Shader.cpp
+src/render/Shader.h
+src/render/ShaderProgram.cpp
+src/render/ShaderProgram.h
+src/render/Display.cpp
+src/render/Display.h
 src/util.cpp
 src/util.h
 src/Log.cpp
 src/Log.h)
-include_directories("${PROJECT_SOURCE_DIR}/src")
+include_directories(
+${PROJECT_SOURCE_DIR}/src
+${PROJECT_SOURCE_DIR}/src/render)
 
 add_executable(blueshock ${SOURCE_FILES})
 

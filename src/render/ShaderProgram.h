@@ -3,10 +3,10 @@
 
 #include "Shader.h"
 
-class GenericShaderProgram {
+class ShaderProgram {
 public:
-	GenericShaderProgram(Shader vert, Shader frag);
-	~GenericShaderProgram();
+	ShaderProgram(Shader vert, Shader frag);
+	~ShaderProgram();
 	GLuint program_id;
 	void bind() { glUseProgram(program_id); }
 };

@@ -18,7 +18,8 @@ char* load_file(const char* path)
 
 			size_t new_len = fread(buf, 1, len, file);
 			if (ferror(file) != 0) {
-				std::cerr << "file " << path << " could not be read." << std::endl;
+				log(LogLevel::WARNING) << "attempted to load file \"" << path << "\" which could not be read";
+				return NULL;
 			} else {
 				buf[new_len++] = '\0';
 			}
@@ -26,8 +27,8 @@ char* load_file(const char* path)
 
 		fclose(file);
 	} else {
-		std::cerr << "file " << path << " could not be opened." << std::endl;
-		exit(EXIT_FAILURE);
+		log(LogLevel::WARNING) << "attempted to load file \"" << path << "\" which could not be opened";
+		return NULL;
 	}
 
 	return buf;
