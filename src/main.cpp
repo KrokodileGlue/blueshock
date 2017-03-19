@@ -9,6 +9,8 @@
 #include "Display.h"
 #include "Shader.h"
 #include "GenericShaderProgram.h"
+#include "Log.h"
+#include "util.h"
 
 int main(int argc, char* argv[])
 {
@@ -69,6 +71,8 @@ int main(int argc, char* argv[])
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
+
+	blueshock_quit();
 	
 	return 0;
 }

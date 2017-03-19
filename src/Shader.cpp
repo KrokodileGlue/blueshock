@@ -4,33 +4,39 @@
 #include <cstdio>
 
 #include "util.h"
+#include "Log.h"
 
 void check_gl_shader_error(GLint shader, GLenum shader_type)
 {
 #define ERROR_LOG_SIZE 4096
 	GLint success;
-	GLchar error_log[ERROR_LOG_SIZE];
+	char error_log[ERROR_LOG_SIZE];
 
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 	if (success == GL_FALSE) {
 		glGetShaderInfoLog(shader, ERROR_LOG_SIZE, NULL, error_log);
 
+		std::string shader_type_str;
+
 		switch (shader_type) {
 		case GL_VERTEX_SHADER:
-			std::cout << "vertex "; break;
+			shader_type_str = "vertex "; break;
 		case GL_FRAGMENT_SHADER:
-			std::cout << "fragment "; break;
+			shader_type_str = "fragment "; break;
 		default:
-			std::cout << "unknown "; break;
+			shader_type_str = "unknown "; break;
 		}
 
-		std::cout << "shader compilation failed: " << error_log << std::endl;
+		log(LogLevel::ERROR) << shader_type_str << "shader compilation failed:\n" << error_log;
+		blueshock_quit();
 	}
 #undef ERROR_LOG_SIZE
 }
 
 Shader::Shader(const std::string& filename, GLenum shader_type)
 {
+	log(LogLevel::INFO) << "compiling shader " << filename;
+
 	char* src = load_file(filename.c_str());
 	
 	shader_id = glCreateShader(shader_type);

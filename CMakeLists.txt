@@ -26,7 +26,9 @@ src/GenericShaderProgram.h
 src/Display.cpp
 src/Display.h
 src/util.cpp
-src/util.h)
+src/util.h
+src/Log.cpp
+src/Log.h)
 include_directories("${PROJECT_SOURCE_DIR}/src")
 
 add_executable(blueshock ${SOURCE_FILES})
