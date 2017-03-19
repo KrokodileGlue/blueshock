@@ -25,6 +25,8 @@ src/render/ShaderProgram.cpp
 src/render/ShaderProgram.h
 src/render/Display.cpp
 src/render/Display.h
+src/render/Camera.cpp
+src/render/Camera.h
 src/util.cpp
 src/util.h
 src/Log.cpp

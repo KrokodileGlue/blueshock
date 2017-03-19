@@ -19,8 +19,8 @@ int main(int argc, char* argv[])
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	Shader vert_shader("res/shader/vert_shader.txt", GL_VERTEX_SHADER);
-	Shader frag_shader("res/shader/frag_shader.txt", GL_FRAGMENT_SHADER);
+	Shader vert_shader(GL_VERTEX_SHADER, "res/shader/vert_shader.txt", "vertex shader");
+	Shader frag_shader(GL_FRAGMENT_SHADER, "res/shader/frag_shader.txt", "fragment shader");
 	ShaderProgram shader_program(vert_shader, frag_shader);
 
 	GLfloat vertices[] = {
