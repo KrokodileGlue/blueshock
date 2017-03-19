@@ -8,7 +8,7 @@
 
 #include "Display.h"
 #include "Shader.h"
-#include "GenericShaderProgram.h"
+#include "ShaderProgram.h"
 #include "Log.h"
 #include "util.h"
 
@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 
 	Shader vert_shader("res/shader/vert_shader.txt", GL_VERTEX_SHADER);
 	Shader frag_shader("res/shader/frag_shader.txt", GL_FRAGMENT_SHADER);
-	GenericShaderProgram shader_program(vert_shader, frag_shader);
+	ShaderProgram shader_program(vert_shader, frag_shader);
 
 	GLfloat vertices[] = {
 		 0.5f,  0.5f, 0.0f,  // Top Right
