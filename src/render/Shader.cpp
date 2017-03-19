@@ -33,7 +33,7 @@ void check_gl_shader_error(GLint shader, GLenum shader_type)
 #undef ERROR_LOG_SIZE
 }
 
-Shader::Shader(const std::string& filename, GLenum shader_type)
+Shader::Shader(GLenum shader_type, const std::string& filename, std::string shader_name) : name(shader_name), path(filename)
 {
 	log(LogLevel::INFO) << "compiling shader " << filename;
 
