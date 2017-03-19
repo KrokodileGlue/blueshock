@@ -1,6 +1,8 @@
 #include "util.h"
 #include "Log.h"
 
+#include <matrix_transform.hpp>
+
 char* load_file(const char* path)
 {
 	char* buf = NULL;
@@ -39,4 +41,9 @@ void blueshock_quit()
 	log(LogLevel::INFO) << "shutting down";
 	dump_log();
 	exit(EXIT_SUCCESS);
+}
+
+glm::mat4 calc_projection_matrix(double fov)
+{
+	return glm::perspective((float)glm::radians(fov), 4.0f / 3.0f, 0.1f, 100.f);
 }

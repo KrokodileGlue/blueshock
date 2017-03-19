@@ -11,6 +11,7 @@
 #include "ShaderProgram.h"
 #include "Log.h"
 #include "util.h"
+#include "Camera.h"
 
 int main(int argc, char* argv[])
 {
@@ -22,6 +23,7 @@ int main(int argc, char* argv[])
 	Shader vert_shader(GL_VERTEX_SHADER, "res/shader/vert_shader.txt", "vertex shader");
 	Shader frag_shader(GL_FRAGMENT_SHADER, "res/shader/frag_shader.txt", "fragment shader");
 	ShaderProgram shader_program(vert_shader, frag_shader);
+	Camera camera(0, 0, 0);
 
 	GLfloat vertices[] = {
 		 0.5f,  0.5f, 0.0f,  // Top Right
@@ -53,19 +55,24 @@ int main(int argc, char* argv[])
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
+	float delta = 0.;
 	SDL_Event e;
 	bool running = true;
 	while (running) {
+		camera.setPos(glm::vec3(sin(delta), 0.0, 0.0));
 		display.update();
 
 		while (SDL_PollEvent(&e))
 			if (e.type == SDL_QUIT) running = false;
 		
 		shader_program.bind();
+		shader_program.setUniformMatrix4fv("view_matrix", camera.getViewMatrix());
+		shader_program.setUniformMatrix4fv("projection_matrix", calc_projection_matrix(45.0f));
 		glBindVertexArray(VAO);
 
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
+		delta += 0.1;
 	}
 
 	glDeleteVertexArrays(1, &VAO);

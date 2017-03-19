@@ -33,7 +33,10 @@ src/Log.cpp
 src/Log.h)
 include_directories(
 ${PROJECT_SOURCE_DIR}/src
-${PROJECT_SOURCE_DIR}/src/render)
+${PROJECT_SOURCE_DIR}/src/render
+${PROJECT_SOURCE_DIR}/third_party/glm
+${PROJECT_SOURCE_DIR}/third_party/glm/gtc
+${PROJECT_SOURCE_DIR}/third_party/glm/gtx)
 
 add_executable(blueshock ${SOURCE_FILES})
 

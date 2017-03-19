@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "Log.h"
+#include "type_ptr.hpp"
 
 void check_gl_shader_program_error(GLint program_id)
 {
@@ -27,6 +28,22 @@ ShaderProgram::ShaderProgram(Shader vert, Shader frag)
 	glLinkProgram(program_id);
 
 	check_gl_shader_program_error(program_id);
+}
+
+void ShaderProgram::setUniform3f(const std::string& uniform_name, const glm::vec3& vec)
+{
+	GLint uniform_loc = glGetUniformLocation(program_id, uniform_name.c_str());
+	if (uniform_loc != -1) {
+		glUniform3fv(uniform_loc, 1, glm::value_ptr(vec));
+	}
+}
+
+void ShaderProgram::setUniformMatrix4fv(const std::string& uniform_name, const glm::mat4& mat)
+{
+	GLint uniform_loc = glGetUniformLocation(program_id, uniform_name.c_str());
+	if (uniform_loc != -1) {
+		glUniformMatrix4fv(uniform_loc, 1, GL_FALSE, glm::value_ptr(mat));
+	}
 }
 
 ShaderProgram::~ShaderProgram()
