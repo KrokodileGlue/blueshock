@@ -12,6 +12,7 @@
 #include "Log.h"
 #include "util.h"
 #include "Camera.h"
+#include "Input.h"
 
 int main(int argc, char* argv[])
 {
@@ -60,12 +61,14 @@ int main(int argc, char* argv[])
 	while (running) {
 		camera.pitch = sin(delta) * 45.0f / 4.0f;
 		camera.yaw = cos(delta) * 45.0f / 4.0f;
-		//camera.setPos(glm::vec3(sin(delta), 0.0, -5.0));
-		display.update();
-
+		
 		while (SDL_PollEvent(&e))
 			if (e.type == SDL_QUIT) running = false;
+			else if (e.type == SDL_KEYDOWN || e.type == SDL_KEYUP) input_add_key_event(e);
 		
+		display.update();
+		update_input();
+
 		shader_program.bind();
 		shader_program.setUniformMatrix4fv("view_matrix", camera.getViewMatrix());
 		shader_program.setUniformMatrix4fv("projection_matrix", calc_projection_matrix(45.f, display.width, display.height));
@@ -73,7 +76,7 @@ int main(int argc, char* argv[])
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
-		delta += 0.025;
+		delta += 0.025f;
 	}
 
 	glDeleteVertexArrays(1, &VAO);

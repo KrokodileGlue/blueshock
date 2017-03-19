@@ -30,7 +30,9 @@ src/render/Camera.h
 src/util.cpp
 src/util.h
 src/Log.cpp
-src/Log.h)
+src/Log.h
+src/Input.cpp
+src/Input.h)
 include_directories(
 ${PROJECT_SOURCE_DIR}/src
 ${PROJECT_SOURCE_DIR}/src/render
