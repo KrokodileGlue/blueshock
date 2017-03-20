@@ -2,6 +2,7 @@
 #define MESH_H
 
 #include <vector>
+#include <string>
 
 #include "GL/glew.h"
 #include "glm.hpp"

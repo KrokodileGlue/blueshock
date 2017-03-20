@@ -51,11 +51,12 @@ if(WIN32)
 	endif()
 	
 else(WIN32)
-
 	find_path(
 	  assimp_INCLUDE_DIRS
 	  NAMES postprocess.h scene.h version.h config.h cimport.h
-	  PATHS /usr/local/include/
+	  PATHS
+	  /usr/local/include/
+	  /usr/local/include/assimp/
 	)
 
 	find_library(
@@ -78,4 +79,6 @@ else(WIN32)
 	  endif (assimp_FIND_REQUIRED)
 	endif (assimp_FOUND)
 	
+	message("assimp include directory: " ${assimp_INCLUDE_DIRS})
+	message("assimp library location: " ${assimp_LIBRARIES})
 endif(WIN32)
