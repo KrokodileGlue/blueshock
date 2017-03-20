@@ -13,6 +13,8 @@
 #include "util.h"
 #include "Camera.h"
 #include "Input.h"
+#include "Model.h"
+#include "Renderer.h"
 
 int main(int argc, char* argv[])
 {
@@ -23,7 +25,9 @@ int main(int argc, char* argv[])
 	Shader vert_shader(GL_VERTEX_SHADER, "res/shader/vert_shader.txt", "static vertex shader");
 	Shader frag_shader(GL_FRAGMENT_SHADER, "res/shader/frag_shader.txt", "static fragment shader");
 	ShaderProgram shader_program(vert_shader, frag_shader);
-	Camera camera(0, 0, -5);
+
+	Renderer renderer(shader_program);
+	Camera camera(0, 0, 0);
 
 	GLfloat vertices[] = {
 		 0.5f,  0.5f, 0.0f,  // Top Right
@@ -37,30 +41,15 @@ int main(int argc, char* argv[])
 		1, 2, 3
 	};
 
-	GLuint VBO, VAO, EBO;
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-	glBindVertexArray(VAO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+	Model model(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 
 	float delta = 0.;
 	SDL_Event e;
 	bool running = true;
 	while (running) {
-		camera.pitch = sin(delta) * 45.0f / 4.0f;
-		camera.yaw = cos(delta) * 45.0f / 4.0f;
+		//camera.pitch = sin(delta) * 45.0f / 4.0f;
+		//camera.yaw = cos(delta) * 45.0f / 4.0f;
+		camera.setPos(glm::vec3(sin(delta) * 2.0f, 0.0f, cos(delta) * 2.0f));
 		
 		while (SDL_PollEvent(&e))
 			if (e.type == SDL_QUIT) running = false;
@@ -69,19 +58,10 @@ int main(int argc, char* argv[])
 		display.update();
 		update_input();
 
-		shader_program.bind();
-		shader_program.setUniformMatrix4fv("view_matrix", camera.getViewMatrix());
-		shader_program.setUniformMatrix4fv("projection_matrix", calc_projection_matrix(45.f, display.width, display.height));
+		renderer.render(model, camera, calc_projection_matrix(45.f, display.width, display.height));
 
-		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
 		delta += 0.025f;
 	}
-
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
 
 	blueshock_quit();
 	

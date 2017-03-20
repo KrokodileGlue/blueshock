@@ -27,6 +27,10 @@ src/render/Display.cpp
 src/render/Display.h
 src/render/Camera.cpp
 src/render/Camera.h
+src/render/Model.cpp
+src/render/Model.h
+src/render/Renderer.cpp
+src/render/Renderer.h
 src/util.cpp
 src/util.h
 src/Log.cpp
