@@ -16,6 +16,7 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 find_package(SDL2 REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
+find_package(assimp REQUIRED)
 
 set(SOURCE_FILES
 src/main.cpp
@@ -31,6 +32,8 @@ src/render/Model.cpp
 src/render/Model.h
 src/render/Renderer.cpp
 src/render/Renderer.h
+src/render/Mesh.cpp
+src/render/Mesh.h
 src/util.cpp
 src/util.h
 src/Log.cpp
@@ -42,7 +45,8 @@ ${PROJECT_SOURCE_DIR}/src
 ${PROJECT_SOURCE_DIR}/src/render
 ${PROJECT_SOURCE_DIR}/third_party/glm
 ${PROJECT_SOURCE_DIR}/third_party/glm/gtc
-${PROJECT_SOURCE_DIR}/third_party/glm/gtx)
+${PROJECT_SOURCE_DIR}/third_party/glm/gtx
+${ASSIMP_INCLUDE_DIR})
 
 add_executable(blueshock ${SOURCE_FILES})
 
@@ -62,5 +66,6 @@ include_directories(${GLEW_INCLUDE_DIR})
 target_link_libraries(blueshock ${SDL2_LIBRARY})
 target_link_libraries(blueshock ${GLEW_LIBRARY})
 target_link_libraries(blueshock ${OPENGL_gl_LIBRARY})
+target_link_libraries(blueshock ${ASSIMP_LIBRARY_DIR})
 
 install (TARGETS blueshock DESTINATION bin)

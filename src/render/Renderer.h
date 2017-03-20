@@ -11,7 +11,7 @@
 class Renderer {
 public:
 	Renderer(ShaderProgram in_shader_program) : shader_program(in_shader_program) {};
-	void render(const Model& model, Camera camera, glm::mat4 projection_matrix);
+	void render(Model& model, Camera camera, glm::mat4 projection_matrix);
 private:
 	ShaderProgram shader_program;
 };

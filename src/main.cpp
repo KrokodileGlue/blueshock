@@ -1,8 +1,6 @@
 #define GLEW_STATIC
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
+#include <vector>
 
 #include <GL/glew.h>
 
@@ -15,6 +13,7 @@
 #include "Input.h"
 #include "Model.h"
 #include "Renderer.h"
+#include "Mesh.h"
 
 int main(int argc, char* argv[])
 {
@@ -29,19 +28,7 @@ int main(int argc, char* argv[])
 	Renderer renderer(shader_program);
 	Camera camera(0, 0, 0);
 
-	GLfloat vertices[] = {
-		 0.5f,  0.5f, 0.0f,  // Top Right
-		 0.5f, -0.5f, 0.0f,  // Bottom Right
-		-0.5f, -0.5f, 0.0f,  // Bottom Left
-		-0.5f,  0.5f, 0.0f   // Top Left 
-	};
-	
-	GLuint indices[] = {
-		0, 1, 3,
-		1, 2, 3
-	};
-
-	Model model(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
+	Model model("res/model/bunny.obj");
 
 	float delta = 0.;
 	SDL_Event e;
@@ -49,7 +36,7 @@ int main(int argc, char* argv[])
 	while (running) {
 		//camera.pitch = sin(delta) * 45.0f / 4.0f;
 		//camera.yaw = cos(delta) * 45.0f / 4.0f;
-		camera.setPos(glm::vec3(sin(delta) * 2.0f, 0.0f, cos(delta) * 2.0f));
+		camera.setPos(glm::vec3(sin(delta) * 5.0f, 2.0f, cos(delta) * 5.0f));
 		
 		while (SDL_PollEvent(&e))
 			if (e.type == SDL_QUIT) running = false;
@@ -58,7 +45,7 @@ int main(int argc, char* argv[])
 		display.update();
 		update_input();
 
-		renderer.render(model, camera, calc_projection_matrix(45.f, display.width, display.height));
+		renderer.render(model, camera, calc_projection_matrix(90.f, display.width, display.height));
 
 		delta += 0.025f;
 	}

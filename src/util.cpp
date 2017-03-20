@@ -46,5 +46,5 @@ void blueshock_quit()
 
 glm::mat4 calc_projection_matrix(float fov, int width, int height)
 {
-	return glm::perspective(glm::radians(fov), (float)width / (float)height, 0.1f, 10.0f);
+	return glm::perspective(glm::radians(fov), (float)width / (float)height, 0.1f, 5000.0f);
 }
