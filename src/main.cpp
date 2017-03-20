@@ -16,14 +16,13 @@
 int main(int argc, char* argv[])
 {
 	Display display(512, 512);
-	
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	Shader vert_shader(GL_VERTEX_SHADER, "res/shader/vert_shader.txt", "vertex shader");
-	Shader frag_shader(GL_FRAGMENT_SHADER, "res/shader/frag_shader.txt", "fragment shader");
+	Shader vert_shader(GL_VERTEX_SHADER, "res/shader/vert_shader.txt", "static vertex shader");
+	Shader frag_shader(GL_FRAGMENT_SHADER, "res/shader/frag_shader.txt", "static fragment shader");
 	ShaderProgram shader_program(vert_shader, frag_shader);
-	Camera camera(0, 0, 0);
+	Camera camera(0, 0, -5);
 
 	GLfloat vertices[] = {
 		 0.5f,  0.5f, 0.0f,  // Top Right
@@ -59,7 +58,9 @@ int main(int argc, char* argv[])
 	SDL_Event e;
 	bool running = true;
 	while (running) {
-		camera.setPos(glm::vec3(sin(delta), 0.0, 0.0));
+		camera.pitch = sin(delta) * 45.0f / 4.0f;
+		camera.yaw = cos(delta) * 45.0f / 4.0f;
+		//camera.setPos(glm::vec3(sin(delta), 0.0, -5.0));
 		display.update();
 
 		while (SDL_PollEvent(&e))
@@ -67,12 +68,12 @@ int main(int argc, char* argv[])
 		
 		shader_program.bind();
 		shader_program.setUniformMatrix4fv("view_matrix", camera.getViewMatrix());
-		shader_program.setUniformMatrix4fv("projection_matrix", calc_projection_matrix(45.0f));
-		glBindVertexArray(VAO);
+		shader_program.setUniformMatrix4fv("projection_matrix", calc_projection_matrix(45.f, display.width, display.height));
 
+		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
-		delta += 0.1;
+		delta += 0.025;
 	}
 
 	glDeleteVertexArrays(1, &VAO);

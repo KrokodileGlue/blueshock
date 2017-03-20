@@ -1,5 +1,6 @@
 #include "util.h"
 #include "Log.h"
+#include "Display.h"
 
 #include <matrix_transform.hpp>
 
@@ -43,7 +44,7 @@ void blueshock_quit()
 	exit(EXIT_SUCCESS);
 }
 
-glm::mat4 calc_projection_matrix(double fov)
+glm::mat4 calc_projection_matrix(float fov, int width, int height)
 {
-	return glm::perspective((float)glm::radians(fov), 4.0f / 3.0f, 0.1f, 100.f);
+	return glm::perspective(glm::radians(fov), (float)width / (float)height, 0.1f, 10.0f);
 }
