@@ -9,8 +9,8 @@ public:
 	Display(int default_width, int default_height);
 	~Display();
 	void update();
-private:
 	int width, height;
+private:
 	SDL_Window* win;
 	SDL_GLContext context;
 };

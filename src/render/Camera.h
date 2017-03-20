@@ -5,13 +5,13 @@
 
 class Camera {
 public:
-	Camera(double x, double y, double z);
-	~Camera();
+	Camera(double x, double y, double z) : pos(x, y, z) {}
 	glm::mat4 getViewMatrix();
 	void setPos(glm::vec3 in_pos) { pos = in_pos; };
 	void increasePos(glm::vec3 in_pos) { pos += in_pos; };
+	float yaw = 0.0f, pitch = 0.0f;
 private:
-	glm::vec3 pos;
+	glm::vec3 pos, up = glm::vec3(0, 1, 0), right = glm::vec3(1, 0, 0);
 };
 
 #endif
