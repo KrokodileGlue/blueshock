@@ -27,6 +27,10 @@ ShaderProgram::ShaderProgram(Shader vert, Shader frag)
 	glAttachShader(program_id, frag.shader_id);
 	glLinkProgram(program_id);
 
+	GLint position_attribute = glGetAttribLocation(program_id, "position");
+	glEnableVertexAttribArray(position_attribute);
+	glVertexAttribPointer(position_attribute, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
+
 	check_gl_shader_program_error(program_id);
 }
 

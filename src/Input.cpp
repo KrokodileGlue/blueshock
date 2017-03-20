@@ -38,7 +38,7 @@ void update_input()
 
 	input_events.clear();
 
-#ifdef 0
+#if 0
 	for (auto key : keys_pressed)  std::cerr << "key " << key << " pressed\n";
 	for (auto key : keys_released) std::cerr << "key " << key << " released\n";
 	for (auto key : keys_down)     std::cerr << "key " << key << " is down!\n";
