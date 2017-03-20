@@ -66,6 +66,6 @@ include_directories(${GLEW_INCLUDE_DIR})
 target_link_libraries(blueshock ${SDL2_LIBRARY})
 target_link_libraries(blueshock ${GLEW_LIBRARY})
 target_link_libraries(blueshock ${OPENGL_gl_LIBRARY})
-target_link_libraries(blueshock ${ASSIMP_LIBRARY_DIR})
+target_link_libraries(blueshock ${assimp_LIBRARIES})
 
 install (TARGETS blueshock DESTINATION bin)
