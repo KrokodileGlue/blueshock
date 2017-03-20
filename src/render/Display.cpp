@@ -25,6 +25,7 @@ Display::Display(int default_width, int default_height)
 	SDL_GL_SetSwapInterval(1);
 
 	glEnable(GL_MULTISAMPLE);
+	glEnable(GL_DEPTH_TEST);
 	glViewport(0, 0, width, height);
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -45,5 +46,5 @@ void Display::update()
 	SDL_GetWindowSize(win, &width, &height);
 	glViewport(0, 0, width, height);
 
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
