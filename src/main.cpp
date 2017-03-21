@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 	Renderer renderer(shader_program);
 	Camera camera(0, 0, 0);
 
-	Model model("res/model/bunny.obj");
+	Model model("res/model/blah.obj");
 
 	float delta = 0.;
 	SDL_Event e;
@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 	while (running) {
 		//camera.pitch = sin(delta) * 45.0f / 4.0f;
 		//camera.yaw = cos(delta) * 45.0f / 4.0f;
-		camera.setPos(glm::vec3(sin(delta) * 5.0f, 2.0f, cos(delta) * 5.0f));
+		camera.setPos(glm::vec3(sin(delta) * 14.0f, 10.0f, cos(delta) * 14.0f));
 		
 		while (SDL_PollEvent(&e))
 			if (e.type == SDL_QUIT) running = false;

@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-#include "rotate_vector.hpp"
+#include "glm/gtx/rotate_vector.hpp"
 #include <iostream>
 
 glm::mat4 Camera::getViewMatrix()
