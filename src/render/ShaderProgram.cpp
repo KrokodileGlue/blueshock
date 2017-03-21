@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "Log.h"
-#include "type_ptr.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 void check_gl_shader_program_error(GLint program_id)
 {
