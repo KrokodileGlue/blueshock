@@ -41,7 +41,7 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		log(LogLevel::WARNING) << "model does not contain normal data.";
 	}
 
-	for (int i = 0; i < mesh->mNumVertices; i++) {
+	for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
 		Vertex vertex;
 		glm::vec3 vector;
 
