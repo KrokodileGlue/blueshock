@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 
+#include "assimp/Importer.hpp"
 #include "GL/glew.h"
 #include "glm/glm.hpp"
 
@@ -15,6 +16,7 @@ struct Vertex {
 struct Texture {
 	GLuint id;
 	std::string type;
+	aiString path;
 };
 
 class Mesh {

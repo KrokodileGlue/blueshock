@@ -77,6 +77,8 @@ GLuint load_gl_texture(std::string path)
 	return texture_id;
 }
 
+std::vector<std::string> loaded_textures;
+
 std::vector<Texture> load_material_textures(aiMaterial* mat, aiTextureType type, std::string typeName)
 {
 	std::vector<Texture> textures;
@@ -86,14 +88,26 @@ std::vector<Texture> load_material_textures(aiMaterial* mat, aiTextureType type,
 		mat->GetTexture(type, i, &str);
 
 		Texture texture;
+		bool should_load_texture = true;
+		std::string path = "res/model/tex/" + std::string(str.C_Str());
 
-		GLuint texture_id = load_gl_texture("res/model/tex/" + std::string(str.C_Str()));
-		//std::cout << "requesting texture: " << std::string(str.C_Str()) << std::endl;
-		std::cout << "texture_id: " << texture_id << std::endl;
+		for (int i = 0; i < loaded_textures.size(); i++) {
+			if (loaded_textures[i] == path) {
+				should_load_texture = false;
+				break;
+			}
+		}
 
-		texture.id = texture_id;
-		texture.type = typeName;
-		textures.push_back(texture);
+		if (should_load_texture) {
+			GLuint texture_id = load_gl_texture(path);
+			//std::cout << "requesting texture: " << std::string(str.C_Str()) << std::endl;
+			std::cout << "texture_id: " << texture_id << std::endl;
+
+			texture.id = texture_id;
+			texture.type = typeName;
+			textures.push_back(texture);
+			loaded_textures.push_back(path);
+		}
 	}
 
 	return textures;
