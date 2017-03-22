@@ -8,13 +8,15 @@
 
 void check_gl_shader_error(GLint shader, GLenum shader_type)
 {
-#define ERROR_LOG_SIZE 4096
 	GLint success;
-	char error_log[ERROR_LOG_SIZE];
-
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+
 	if (success == GL_FALSE) {
-		glGetShaderInfoLog(shader, ERROR_LOG_SIZE, NULL, error_log);
+		GLint log_size = 0;
+		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &log_size);
+		char* error_log = new char[log_size];
+
+		glGetShaderInfoLog(shader, log_size, NULL, error_log);
 
 		std::string shader_type_str;
 
@@ -27,10 +29,9 @@ void check_gl_shader_error(GLint shader, GLenum shader_type)
 			shader_type_str = "unknown "; break;
 		}
 
-		log(LogLevel::ERROR) << shader_type_str << "shader compilation failed:\n" << error_log;
-		blueshock_quit();
+		log(LogLevel::WARNING) << shader_type_str << "shader compilation failed:\n" << error_log;
+		delete error_log;
 	}
-#undef ERROR_LOG_SIZE
 }
 
 Shader::Shader(GLenum shader_type, const std::string& filename, std::string shader_name) : name(shader_name), path(filename)

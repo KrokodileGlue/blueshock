@@ -6,16 +6,19 @@
 
 void check_gl_shader_program_error(GLint program_id)
 {
-#define ERROR_LOG_SIZE 4096
 	GLint success;
-	char error_log[ERROR_LOG_SIZE];
-
 	glGetProgramiv(program_id, GL_LINK_STATUS, &success);
+
 	if (success == GL_FALSE) {
-		glGetProgramInfoLog(program_id, ERROR_LOG_SIZE, NULL, error_log);
-		log(LogLevel::INFO) << "shader program linking failed:\n" << error_log;
+		GLint log_size = 0;
+		glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &log_size);
+		char* error_log = new char[log_size];
+
+		glGetProgramInfoLog(program_id, log_size, NULL, error_log);
+		log(LogLevel::WARNING) << "shader program linking failed:\n" << error_log;
+
+		delete error_log;
 	}
-#undef ERROR_LOG_SIZE
 }
 
 ShaderProgram::ShaderProgram(Shader vert, Shader frag)
@@ -27,11 +30,23 @@ ShaderProgram::ShaderProgram(Shader vert, Shader frag)
 	glAttachShader(program_id, frag.shader_id);
 	glLinkProgram(program_id);
 
-	GLint position_attribute = glGetAttribLocation(program_id, "position");
-	glEnableVertexAttribArray(position_attribute);
-	glVertexAttribPointer(position_attribute, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
-
 	check_gl_shader_program_error(program_id);
+}
+
+void ShaderProgram::setUniform1f(const std::string& uniform_name, float num)
+{
+	GLint uniform_loc = glGetUniformLocation(program_id, uniform_name.c_str());
+	if (uniform_loc != -1) {
+		glUniform1f(uniform_loc, num);
+	}
+}
+
+void ShaderProgram::setUniform1i(const std::string& uniform_name, GLint num)
+{
+	GLint uniform_loc = glGetUniformLocation(program_id, uniform_name.c_str());
+	if (uniform_loc != -1) {
+		glUniform1i(uniform_loc, num);
+	}
 }
 
 void ShaderProgram::setUniform3f(const std::string& uniform_name, const glm::vec3& vec)
