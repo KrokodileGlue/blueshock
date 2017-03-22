@@ -30,9 +30,9 @@ int main(int argc, char* argv[])
 	Camera camera(0, 0, -25);
 
 	Model model("res/model/Locomotive C36.obj");
-	//model.scale = 0.025f;
-	model.pos = glm::vec3(0.f, -7.25f, 0.f);
-	model.rot = glm::vec3(0.0f, 180.0f, 0.0f);
+	model.scale = 0.025f;
+	//model.pos = glm::vec3(0.f, -7.25f, 0.f);
+	//model.rot = glm::vec3(0.0f, 180.0f, 0.0f);
 
 	float delta = 0.;
 	SDL_Event e;
