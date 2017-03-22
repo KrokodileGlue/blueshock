@@ -28,6 +28,7 @@ public:
 	}
 	GLuint getVAO() { return vao; }
 	size_t getNumIndices() { return indices.size(); }
+	std::vector<Texture> getTextures() { return textures; }
 private:
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;

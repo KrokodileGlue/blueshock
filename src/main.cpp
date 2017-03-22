@@ -26,17 +26,20 @@ int main(int argc, char* argv[])
 	ShaderProgram shader_program(vert_shader, frag_shader);
 
 	Renderer renderer(shader_program);
-	Camera camera(0, 0, 0);
+	//Camera camera(0, 0, -15);
+	Camera camera(0, 0, -25);
 
-	Model model("res/model/blah.obj");
+	Model model("res/model/Locomotive C36.obj");
+	//model.scale = 0.025f;
+	model.pos = glm::vec3(0.f, -7.25f, 0.f);
+	model.rot = glm::vec3(0.0f, 180.0f, 0.0f);
 
 	float delta = 0.;
 	SDL_Event e;
 	bool running = true;
 	while (running) {
-		//camera.pitch = sin(delta) * 45.0f / 4.0f;
-		//camera.yaw = cos(delta) * 45.0f / 4.0f;
-		camera.setPos(glm::vec3(sin(delta) * 14.0f, 10.0f, cos(delta) * 14.0f));
+		//camera.setPos(glm::vec3(sin(delta) * 14.0f, 10.0f, cos(delta) * 14.0f));
+		model.rot = glm::vec3(0.f, delta * 90.0f, 0.f);
 		
 		while (SDL_PollEvent(&e))
 			if (e.type == SDL_QUIT) running = false;
@@ -45,7 +48,7 @@ int main(int argc, char* argv[])
 		display.update();
 		update_input();
 
-		renderer.render(model, camera, calc_projection_matrix(90.f, display.width, display.height));
+		renderer.render(model, camera, calc_projection_matrix(60.f, display.width, display.height));
 
 		delta += 0.025f;
 	}

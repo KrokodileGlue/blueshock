@@ -11,8 +11,6 @@ if(WIN32)
 	set (
 		ASSIMP_INCLUDE_DIR ${ASSIMP_LOCATION}/include
 	)
-	
-	message ("assimp include dir: ${ASSIMP_INCLUDE_DIR}")
 
 	find_library(
 		ASSIMP_LIBRARY
@@ -20,8 +18,6 @@ if(WIN32)
 		PATHS
 			${ASSIMP_LOCATION}/build/code/Debug
 	)
-	
-	message ("assimp library: ${ASSIMP_LIBRARY}")
 else () # ASSume we're on some Linux distro
 	find_path (
 		ASSIMP_INCLUDE_DIR
