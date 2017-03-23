@@ -3,6 +3,8 @@
 
 #include "glm/gtc/matrix_transform.hpp"
 
+using namespace sia;
+
 glm::mat4 Model::getModelMatrix()
 {
 	glm::mat4 res;
@@ -39,7 +41,7 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 	for (unsigned int i = 0; i < node->mNumMeshes; i++) {
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 		std::cout << "processing mesh with " << mesh->mNumVertices << " vertices.\n";
-		meshes.push_back(processMesh(mesh, scene)); /* crash... */
+		meshes.push_back(processMesh(mesh, scene));
 	}
 	
 	for (unsigned int i = 0; i < node->mNumChildren; i++) {

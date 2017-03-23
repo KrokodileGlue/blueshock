@@ -8,6 +8,8 @@
 #include "GL/glew.h"
 #include "glm/glm.hpp"
 
+namespace sia {
+
 struct Vertex {
 	glm::vec3 pos, normal;
 	glm::vec2 tex_coord;
@@ -38,5 +40,7 @@ private:
 	GLuint vao, vbo, ebo;
 	void setupMesh();
 };
+
+}
 
 #endif

@@ -4,6 +4,8 @@
 #include "Shader.h"
 #include "glm/glm.hpp"
 
+namespace sia {
+
 class ShaderProgram {
 public:
 	ShaderProgram(Shader vert, Shader frag);
@@ -16,5 +18,7 @@ public:
 private:
 	GLuint program_id;
 };
+
+}
 
 #endif

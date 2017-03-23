@@ -4,6 +4,8 @@
 #include "Log.h"
 #include "glm/gtc/type_ptr.hpp"
 
+using namespace sia;
+
 void check_gl_shader_program_error(GLint program_id)
 {
 	GLint success;
