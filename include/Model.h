@@ -12,6 +12,8 @@
 #include "Mesh.h"
 #include "glm/glm.hpp"
 
+namespace sia {
+
 class Model {
 public:
 	Model(std::string path)
@@ -29,5 +31,7 @@ private:
 	void processNode(aiNode* node, const aiScene* scene);
 	Mesh processMesh(aiMesh* mesh, const aiScene* scene);
 };
+
+}
 
 #endif

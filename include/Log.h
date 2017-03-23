@@ -4,11 +4,15 @@
 #include <iostream>
 #include <sstream>
 
+namespace sia {
+
 enum class LogLevel {
 	ERROR, WARNING, INFO, DEBUG1, DEBUG2, DEBUG3
 };
 
 std::ostringstream& log(LogLevel level);
 void dump_log();
+
+}
 
 #endif

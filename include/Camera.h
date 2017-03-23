@@ -3,6 +3,8 @@
 
 #include "glm/glm.hpp"
 
+namespace sia {
+
 class Camera {
 public:
 	Camera(double x, double y, double z) : pos(x, y, z) {}
@@ -16,5 +18,7 @@ public:
 private:
 	glm::vec3 pos, up = glm::vec3(0, 1, 0), right = glm::vec3(1, 0, 0);
 };
+
+}
 
 #endif

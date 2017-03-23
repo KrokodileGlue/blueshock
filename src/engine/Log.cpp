@@ -5,12 +5,14 @@
 #include <chrono>
 #include <ctime>
 
+using namespace sia;
+
 std::ostringstream oss;
 std::ostringstream null_stream;
 
 LogLevel max_log_level = LogLevel::DEBUG3;
 
-std::ostringstream& log(LogLevel level)
+std::ostringstream& sia::log(LogLevel level)
 {
 	if (level > max_log_level) {
 		null_stream.str(""), null_stream.clear();
@@ -39,7 +41,7 @@ std::ostringstream& log(LogLevel level)
 	return oss;
 }
 
-void dump_log()
+void sia::dump_log()
 {
 	std::ofstream out("blueshock.log");
 	out << oss.str();

@@ -8,6 +8,8 @@
 #include "Model.h"
 #include "Camera.h"
 
+namespace sia {
+
 class Renderer {
 public:
 	Renderer(ShaderProgram in_shader_program) : shader_program(in_shader_program) {};
@@ -15,5 +17,7 @@ public:
 private:
 	ShaderProgram shader_program;
 };
+
+}
 
 #endif
