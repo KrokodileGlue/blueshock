@@ -1,7 +1,5 @@
 #include "Mesh.h"
 
-using namespace sia;
-
 void Mesh::setupMesh()
 {
 	glGenVertexArrays(1, &vao);

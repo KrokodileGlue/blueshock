@@ -1,8 +1,6 @@
 #include "Display.h"
 #include "Log.h"
 
-using namespace sia;
-
 Display::Display(int default_width, int default_height)
 {
 	log(LogLevel::INFO) << "initializing SDL";

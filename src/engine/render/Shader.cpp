@@ -6,8 +6,6 @@
 #include "util.h"
 #include "Log.h"
 
-using namespace sia;
-
 void check_gl_shader_error(GLint shader, GLenum shader_type)
 {
 	GLint success;

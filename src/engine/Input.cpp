@@ -4,20 +4,18 @@
 #include <vector>
 #include <iostream>
 
-namespace sia {
-
 std::vector<int> keys_pressed;
 std::vector<int> keys_released;
 std::vector<int> keys_down;
 
 std::vector<SDL_Event> input_events;
 
-void sia::input_add_key_event(SDL_Event e)
+void input_add_key_event(SDL_Event e)
 {
 	input_events.push_back(e);
 }
 
-void sia::update_input()
+void update_input()
 {
 	keys_pressed.clear();
 	keys_released.clear();
@@ -47,19 +45,17 @@ void sia::update_input()
 #endif
 }
 
-bool sia::is_key_down(int key)
+bool is_key_down(int key)
 {
 	return std::find(keys_down.begin(), keys_down.end(), key) != keys_down.end();
 }
 
-bool sia::is_key_pressed(int key)
+bool is_key_pressed(int key)
 {
 	return std::find(keys_pressed.begin(), keys_pressed.end(), key) != keys_pressed.end();
 }
 
-bool sia::is_key_released(int key)
+bool is_key_released(int key)
 {
 	return std::find(keys_released.begin(), keys_released.end(), key) != keys_released.end();
-}
-
 }
