@@ -3,13 +3,11 @@
 #include <sstream>
 #include <iostream>
 
-using namespace sia;
-
 void Renderer::render(Model& model, Camera camera, glm::mat4 projection_matrix)
 {
 	shader_program.bind();
 	shader_program.setUniformMatrix4fv("model_matrix", model.getModelMatrix());
-	shader_program.setUniformMatrix4fv("view_matrix", camera.lookAt(glm::vec3(0, 7, 0)));
+	shader_program.setUniformMatrix4fv("view_matrix", camera.getViewMatrix());
 	shader_program.setUniformMatrix4fv("projection_matrix", projection_matrix);
 
 	for (auto mesh : model.getMeshes()) {
@@ -23,7 +21,7 @@ void Renderer::render(Model& model, Camera camera, glm::mat4 projection_matrix)
 			int num = (textures[i].type == "texture_diffuse") ? num_diffuse++ : num_specular++;
 			std::string uniform_name = textures[i].type + std::to_string(num);
 
-			std::cout << "setting " << uniform_name << " to " << i << std::endl;
+			//std::cout << "setting " << uniform_name << " to " << i << std::endl;
 
 			shader_program.setUniform1i(uniform_name, i);
 			glActiveTexture(GL_TEXTURE0 + i);

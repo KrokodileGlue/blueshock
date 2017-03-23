@@ -4,9 +4,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-using namespace sia;
-
-char* sia::load_file(const char* path)
+char* load_file(const char* path)
 {
 	char* buf = NULL;
 	FILE* file = fopen(path, "r");
@@ -39,14 +37,14 @@ char* sia::load_file(const char* path)
 	return buf;
 }
 
-void sia::quit()
+void blueshock_quit()
 {
 	log(LogLevel::INFO) << "shutting down";
 	dump_log();
 	exit(EXIT_SUCCESS);
 }
 
-glm::mat4 sia::calc_projection_matrix(float fov, int width, int height)
+glm::mat4 calc_projection_matrix(float fov, int width, int height)
 {
 	return glm::perspective(glm::radians(fov), (float)width / (float)height, 0.1f, 5000.0f);
 }

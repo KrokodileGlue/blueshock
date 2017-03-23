@@ -4,21 +4,15 @@
 #include <vector>
 #include <string>
 
+#include "Texture.h"
+
 #include "assimp/Importer.hpp"
 #include "GL/glew.h"
 #include "glm/glm.hpp"
 
-namespace sia {
-
 struct Vertex {
 	glm::vec3 pos, normal;
 	glm::vec2 tex_coord;
-};
-
-struct Texture {
-	GLuint id;
-	std::string type;
-	aiString path;
 };
 
 class Mesh {
@@ -40,7 +34,5 @@ private:
 	GLuint vao, vbo, ebo;
 	void setupMesh();
 };
-
-}
 
 #endif

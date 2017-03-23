@@ -3,8 +3,6 @@
 #include "glm/gtx/rotate_vector.hpp"
 #include <iostream>
 
-using namespace sia;
-
 glm::mat4 Camera::lookAt(glm::vec3 place)
 {
 	glm::vec3 front(0, 0, 1);
