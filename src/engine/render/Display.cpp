@@ -1,5 +1,5 @@
-#include "Display.h"
-#include "Log.h"
+#include "engine/render/Display.h"
+#include "engine/Log.h"
 
 Display::Display(int default_width, int default_height)
 {
