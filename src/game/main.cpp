@@ -4,16 +4,16 @@
 
 #include <GL/glew.h>
 
-#include "Display.h"
-#include "Shader.h"
-#include "ShaderProgram.h"
-#include "Log.h"
-#include "util.h"
-#include "Camera.h"
-#include "Input.h"
-#include "Model.h"
-#include "Renderer.h"
-#include "Mesh.h"
+#include "engine/render/Display.h"
+#include "engine/render/Shader.h"
+#include "engine/render/ShaderProgram.h"
+#include "engine/Log.h"
+#include "engine/util.h"
+#include "engine/render/Camera.h"
+#include "engine/Input.h"
+#include "engine/render/Model.h"
+#include "engine/render/Renderer.h"
+#include "engine/render/Mesh.h"
 
 int main(int argc, char* argv[])
 {
@@ -37,7 +37,6 @@ int main(int argc, char* argv[])
 	SDL_Event e;
 	bool running = true;
 	while (running) {
-		//camera.setPos(glm::vec3(sin(time) * 2.0f, 0.0f, cos(time) * 2.0f));
 		model.rot = glm::vec3(0.0f, time * 90.0, 0.0f);
 
 		while (SDL_PollEvent(&e))

@@ -4,10 +4,10 @@
 #include <iostream>
 
 #include "GL/glew.h"
-
-#include "Mesh.h"
 #include "glm/glm.hpp"
-#include "ModelLoader.h"
+
+#include "engine/render/Mesh.h"
+#include "engine/io/ModelLoader.h"
 
 class Model {
 public:

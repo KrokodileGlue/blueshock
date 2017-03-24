@@ -1,10 +1,10 @@
-#include "Shader.h"
+#include "engine/render/Shader.h"
 
 #include <iostream>
 #include <cstdio>
 
-#include "util.h"
-#include "Log.h"
+#include "engine/util.h"
+#include "engine/Log.h"
 
 void check_gl_shader_error(GLint shader, GLenum shader_type)
 {

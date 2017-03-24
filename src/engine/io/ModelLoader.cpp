@@ -1,8 +1,10 @@
-#include "ModelLoader.h"
+#include <vector>
 
-#include "Texture.h"
-#include "Log.h"
 #include "stb_image.h"
+
+#include "engine/io/ModelLoader.h"
+#include "engine/render/Texture.h"
+#include "engine/Log.h"
 
 std::vector<std::string> loaded_textures;
 
@@ -17,7 +19,7 @@ std::vector<Texture> load_material_textures(aiMaterial* mat, aiTextureType type,
 		bool should_load_texture = true;
 		std::string path = "res/model/tex/" + std::string(str.C_Str());
 
-		for (int i = 0; i < loaded_textures.size(); i++) {
+		for (unsigned int i = 0; i < loaded_textures.size(); i++) {
 			if (loaded_textures[i] == path) {
 				should_load_texture = false;
 				break;

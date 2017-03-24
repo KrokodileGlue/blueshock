@@ -1,5 +1,5 @@
-#include "Model.h"
-#include "Log.h"
+#include "engine/render/Model.h"
+#include "engine/Log.h"
 
 #include "glm/gtc/matrix_transform.hpp"
 

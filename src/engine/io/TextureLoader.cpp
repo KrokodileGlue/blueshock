@@ -1,20 +1,20 @@
-#include "Texture.h"
+#include "engine/io/TextureLoader.h"
 
+#include "engine/Log.h"
 #include "stb_image.h"
 
-#include "Log.h"
-
-Texture::Texture(const std::string& path)
+GLuint load_texture(const std::string& path)
 {
 	int width, height, bpp;
 	unsigned char* data = stbi_load(path.c_str(), &width, &height, &bpp, 3);
 	if (!data) {
 		log(LogLevel::WARNING) << "could not load image \"" << path << "\"";
-		return;
+		return -1;
 	}
 
 	log(LogLevel::DEBUG1) << "loading image \"" << path << "\", dimensions: " << width << ", " << height;
 
+	GLuint id;
 	glActiveTexture(GL_TEXTURE0);
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
@@ -29,4 +29,6 @@ Texture::Texture(const std::string& path)
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	stbi_image_free(data);
+	
+	return id;
 }
