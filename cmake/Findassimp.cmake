@@ -15,21 +15,23 @@ if(WIN32)
 	find_library(
 		ASSIMP_LIBRARY
 		NAMES assimp-${ASSIMP_MSVC_VERSION}-mt.lib
-		PATHS
+		PATHS # TODO: look in places other than just this
 			${ASSIMP_LOCATION}/build/code/Debug
 	)
 else () # ASSume we're on some Linux distro
 	find_path (
 		ASSIMP_INCLUDE_DIR
-		NAMES postprocess.h scene.h version.h config.h cimport.h
-		PATHS /usr/local/include/
+		NAMES postprocess.h scene.h postprocess.h scene.h version.h config.h cimport.h
+		PATHS /usr/local/include/assimp
 	)
+	message("ASSIMP_INCLUDE_DIR: ${ASSIMP_INCLUDE_DIR}")
 
 	find_library (
 		ASSIMP_LIBRARY
 		NAMES assimp
-		PATHS /usr/local/lib/
-	)
+		PATHS /usr/local/lib
+		)
+	message("ASSIMP_LIBRARY: ${ASSIMP_LIBRARY}")
 endif ()
 
 if (ASSIMP_INCLUDE_DIR AND ASSIMP_LIBRARY)
@@ -37,9 +39,7 @@ if (ASSIMP_INCLUDE_DIR AND ASSIMP_LIBRARY)
 endif ()
 
 if (assimp_FOUND)
-	if (NOT assimp_FIND_QUIETLY)
-		message(STATUS "Found asset importer library: ${ASSIMP_LIBRARY}")
-	endif ()
+	message(STATUS "Found asset importer library: ${ASSIMP_LIBRARY}")
 else ()
 	if (assimp_FIND_REQUIRED)
 		message (FATAL_ERROR "Could not find asset importer library")
