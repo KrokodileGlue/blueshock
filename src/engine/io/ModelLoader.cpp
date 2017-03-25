@@ -2,9 +2,9 @@
 
 #include "stb_image.h"
 
-#include "engine/io/ModelLoader.h"
-#include "engine/render/Texture.h"
-#include "engine/Log.h"
+#include "ModelLoader.h"
+#include "Texture.h"
+#include "Log.h"
 
 std::vector<std::string> loaded_textures;
 

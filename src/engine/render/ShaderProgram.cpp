@@ -1,8 +1,9 @@
-#include "engine/render/ShaderProgram.h"
-
 #include <iostream>
-#include "engine/Log.h"
+
 #include "glm/gtc/type_ptr.hpp"
+
+#include "ShaderProgram.h"
+#include "Log.h"
 
 void check_gl_shader_program_error(GLint program_id)
 {

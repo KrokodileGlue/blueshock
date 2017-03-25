@@ -8,7 +8,7 @@
 #include "assimp/scene.h"
 #include "assimp/postprocess.h"
 
-#include "engine/io/TextureLoader.h"
+#include "TextureLoader.h"
 
 class Texture {
 public:

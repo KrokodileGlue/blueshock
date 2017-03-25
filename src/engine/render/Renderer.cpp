@@ -1,7 +1,7 @@
-#include "engine/render/Renderer.h"
-
 #include <sstream>
 #include <iostream>
+
+#include "Renderer.h"
 
 void Renderer::render(Model& model, Camera camera, glm::mat4 projection_matrix)
 {

@@ -4,16 +4,16 @@
 
 #include <GL/glew.h>
 
-#include "engine/render/Display.h"
-#include "engine/render/Shader.h"
-#include "engine/render/ShaderProgram.h"
-#include "engine/Log.h"
-#include "engine/util.h"
-#include "engine/render/Camera.h"
-#include "engine/Input.h"
-#include "engine/render/Model.h"
-#include "engine/render/Renderer.h"
-#include "engine/render/Mesh.h"
+#include "Display.h"
+#include "Shader.h"
+#include "ShaderProgram.h"
+#include "Log.h"
+#include "util.h"
+#include "Camera.h"
+#include "Input.h"
+#include "Model.h"
+#include "Renderer.h"
+#include "Mesh.h"
 
 int main(int argc, char* argv[])
 {

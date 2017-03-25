@@ -1,7 +1,8 @@
-#include "engine/render/Camera.h"
+#include <iostream>
 
 #include "glm/gtx/rotate_vector.hpp"
-#include <iostream>
+
+#include "Camera.h"
 
 glm::mat4 Camera::lookAt(glm::vec3 place)
 {

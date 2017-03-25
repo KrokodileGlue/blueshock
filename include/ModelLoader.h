@@ -7,7 +7,7 @@
 #include "assimp/scene.h"
 #include "assimp/postprocess.h"
 
-#include "engine/render/Mesh.h"
+#include "Mesh.h"
 
 std::vector<Mesh> load_model(const std::string& path);
 

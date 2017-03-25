@@ -1,6 +1,6 @@
-#include "engine/util.h"
-#include "engine/Log.h"
-#include "engine/render/Display.h"
+#include "util.h"
+#include "Log.h"
+#include "Display.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
