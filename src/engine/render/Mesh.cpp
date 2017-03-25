@@ -1,4 +1,4 @@
-#include "engine/render/Mesh.h"
+#include "Mesh.h"
 
 void Mesh::setupMesh()
 {

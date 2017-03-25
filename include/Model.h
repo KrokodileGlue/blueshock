@@ -6,8 +6,8 @@
 #include "GL/glew.h"
 #include "glm/glm.hpp"
 
-#include "engine/render/Mesh.h"
-#include "engine/io/ModelLoader.h"
+#include "Mesh.h"
+#include "ModelLoader.h"
 
 class Model {
 public:

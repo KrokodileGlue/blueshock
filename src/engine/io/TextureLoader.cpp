@@ -1,7 +1,7 @@
-#include "engine/io/TextureLoader.h"
-
-#include "engine/Log.h"
 #include "stb_image.h"
+
+#include "TextureLoader.h"
+#include "Log.h"
 
 GLuint load_texture(const std::string& path)
 {
