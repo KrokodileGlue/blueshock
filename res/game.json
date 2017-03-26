@@ -1,0 +1,10 @@
+{
+	"Player": {
+		"pos": 5.0,
+		"scale": 1.0
+	},
+	"Enemy": {
+		"pos": 1.0,
+		"alive": true
+	}
+}

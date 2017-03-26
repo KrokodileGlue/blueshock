@@ -37,11 +37,10 @@ char* load_file(const char* path)
 	return buf;
 }
 
-void blueshock_quit()
+void blueshock_finish()
 {
 	log(LogLevel::INFO) << "shutting down";
 	dump_log();
-	exit(EXIT_SUCCESS);
 }
 
 glm::mat4 calc_projection_matrix(float fov, int width, int height)
