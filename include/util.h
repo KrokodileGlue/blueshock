@@ -7,7 +7,7 @@
 #include "glm/glm.hpp"
 
 char* load_file(const char* path);
-void blueshock_quit();
+void blueshock_finish();
 glm::mat4 calc_projection_matrix(float fov, int width, int height);
 
 #endif

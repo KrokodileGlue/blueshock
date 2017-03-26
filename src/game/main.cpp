@@ -15,8 +15,19 @@
 #include "Renderer.h"
 #include "Mesh.h"
 
+#include "json.hpp"
+
+using json = nlohmann::json;
+
 int main(int argc, char* argv[])
 {
+	json j;
+	char* file_str = load_file("res/game.json");
+	/*if (file_str) {
+		j = json::parse(file_str);
+		std::cout << j.dump(8);
+	}*/
+
 	Display display(512, 512);
 	glewExperimental = GL_TRUE;
 	glewInit();
@@ -52,7 +63,7 @@ int main(int argc, char* argv[])
 		time += 0.0025f;
 	}
 
-	blueshock_quit();
+	blueshock_finish();
 	
-	return 0;
+	return EXIT_SUCCESS;
 }
