@@ -3,7 +3,7 @@
 
 #include "Renderer.h"
 
-void Renderer::render(Model& model, Camera camera, glm::mat4 projection_matrix)
+void Renderer::renderModel(Model& model, Camera camera, glm::mat4 projection_matrix)
 {
 	shader_program.bind();
 	shader_program.setUniformMatrix4fv("model_matrix", model.getModelMatrix());

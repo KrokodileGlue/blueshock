@@ -43,16 +43,15 @@ add_custom_target(copy_resources ALL
 	DEPENDS ${blueshock})
 	
 # http://stackoverflow.com/a/33813154
-	set(_src_root_path "${CMAKE_CURRENT_SOURCE_DIR}")
 	file(
 	    GLOB_RECURSE _source_list 
 	    LIST_DIRECTORIES false
 	    RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-	    "${_src_root_path}/*.c*"
-	    "${_src_root_path}/*.h*"
+	    "${CMAKE_CURRENT_SOURCE_DIR}/*.c*"
+	    "${CMAKE_CURRENT_SOURCE_DIR}/*.h*"
 	)
 
-	add_library(MySources ${_source_list})
+	add_library(blueshock_source_files ${_source_list})
 
 	foreach(_source IN ITEMS ${_source_list})
 	    get_filename_component(_source_path "${_source}" PATH)
@@ -80,4 +79,4 @@ target_link_libraries(blueshock ${GLEW_LIBRARY})
 target_link_libraries(blueshock ${OPENGL_gl_LIBRARY})
 target_link_libraries(blueshock ${ASSIMP_LIBRARY})
 
-install (TARGETS blueshock DESTINATION bin)
+install (TARGETS blueshock DESTINATION /usr/local/bin)
