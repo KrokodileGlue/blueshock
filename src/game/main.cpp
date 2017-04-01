@@ -1,6 +1,7 @@
 #define GLEW_STATIC
 
 #include <vector>
+#include <fstream>
 
 #include <GL/glew.h>
 
@@ -14,20 +15,24 @@
 #include "Model.h"
 #include "Renderer.h"
 #include "Mesh.h"
+#include "Game.h"
 
 #include "json.hpp"
 
-using json = nlohmann::json;
+using nlohmann::json;
+
+/*
+std::ifstream game_json_file("res/game.json");
+
+json j;
+game_json_file >> j;
+game_json_file.close();
+
+std::cout << j.dump(8) << std::endl;
+*/
 
 int main(int argc, char* argv[])
 {
-	json j;
-	char* file_str = load_file("res/game.json");
-	/*if (file_str) {
-		j = json::parse(file_str);
-		std::cout << j.dump(8);
-	}*/
-
 	Display display(512, 512);
 	glewExperimental = GL_TRUE;
 	glewInit();
@@ -44,6 +49,10 @@ int main(int argc, char* argv[])
 	model.pos = glm::vec3(0, -1, 0);
 	model.rot = glm::vec3(0.0f, 0.0f, 0.0f);
 
+	Scene scene;
+	scene.addModelComponent(0, model);
+	scene.addInputComponent(0);
+
 	float time = 0.;
 	SDL_Event e;
 	bool running = true;
@@ -57,8 +66,8 @@ int main(int argc, char* argv[])
 		
 		display.update();
 		update_input();
-
-		renderer.render(model, camera, calc_projection_matrix(60.f, display.width, display.height));
+		scene.update();
+		scene.render(renderer, camera, calc_projection_matrix(60.f, display.width, display.height));
 
 		time += 0.0025f;
 	}
