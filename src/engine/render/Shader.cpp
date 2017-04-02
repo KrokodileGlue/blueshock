@@ -38,14 +38,18 @@ Shader::Shader(GLenum shader_type, const std::string& filename, std::string shad
 	log(LogLevel::INFO) << "compiling shader " << filename;
 
 	char* src = load_file(filename.c_str());
-	
-	shader_id = glCreateShader(shader_type);
-	glShaderSource(shader_id, 1, &src, NULL);
-	glCompileShader(shader_id);
-	
-	check_gl_shader_error(shader_id, shader_type);
 
-	free(src);
+	if (src) {
+		shader_id = glCreateShader(shader_type);
+		glShaderSource(shader_id, 1, &src, NULL);
+		glCompileShader(shader_id);
+
+		check_gl_shader_error(shader_id, shader_type);
+
+		free(src);
+	} else {
+		log(LogLevel::WARNING) << "could not load shader file";
+	}
 }
 
 Shader::~Shader()
