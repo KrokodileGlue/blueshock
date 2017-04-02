@@ -17,6 +17,7 @@ public:
 	}
 	std::string type; /* make this an enum or something */
 	GLuint id;
+	void bind();
 private:
 	aiString path;
 };

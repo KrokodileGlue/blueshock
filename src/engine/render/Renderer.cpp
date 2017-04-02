@@ -12,7 +12,7 @@ void Renderer::renderModel(Model& model, Camera camera, glm::mat4 projection_mat
 
 	for (auto mesh : model.getMeshes()) {
 		glBindVertexArray(mesh.getVAO());
-		glEnableVertexAttribArray(0), glEnableVertexAttribArray(1), glEnableVertexAttribArray(3);
+		glEnableVertexAttribArray(0), glEnableVertexAttribArray(1), glEnableVertexAttribArray(2);
 
 		std::vector<Texture> textures = mesh.getTextures();
 		
@@ -35,7 +35,7 @@ void Renderer::renderModel(Model& model, Camera camera, glm::mat4 projection_mat
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
-		glDisableVertexAttribArray(0), glDisableVertexAttribArray(1), glDisableVertexAttribArray(3);
+		glDisableVertexAttribArray(0), glDisableVertexAttribArray(1), glDisableVertexAttribArray(2);
 		glBindVertexArray(0);
 	}
 }
