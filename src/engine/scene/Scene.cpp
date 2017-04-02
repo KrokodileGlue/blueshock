@@ -19,7 +19,7 @@ void Scene::render(Renderer& renderer, Camera& camera, glm::mat4 proj_mat)
 
 void Scene::update()
 {
-	input_system.update();
-	model_system.update();
-	MessageBus::getSingleton()->clearMessages();
+	input_system.update(message_bus);
+	model_system.update(message_bus);
+	message_bus.clearMessages();
 }

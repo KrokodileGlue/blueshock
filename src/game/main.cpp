@@ -45,9 +45,9 @@ int main(int argc, char* argv[])
 	Camera camera(0, 0, -15);
 
 	Model model("res/model/star-wars-arc-170-pbr.obj");
-	model.scale = 0.5f;
-	model.pos = glm::vec3(0, -1, 0);
-	model.rot = glm::vec3(0.0f, 0.0f, 0.0f);
+	model.scale = 0.25f;
+	model.pos = glm::vec3(0, -1, 20);
+	model.rot = glm::vec3(-90.0f, 0.0f, 0.0f);
 
 	Scene scene;
 	scene.addModelComponent(0, model);
@@ -62,10 +62,10 @@ int main(int argc, char* argv[])
 		while (SDL_PollEvent(&e))
 			if (e.type == SDL_QUIT) running = false;
 			else if (e.type == SDL_KEYDOWN || e.type == SDL_KEYUP)
-				input_add_key_event(e);
+				InputHandler::getSingleton()->addKeyEvent(e);
 		
 		display.update();
-		update_input();
+		InputHandler::getSingleton()->updateInput();
 		scene.update();
 		scene.render(renderer, camera, calc_projection_matrix(60.f, display.width, display.height));
 

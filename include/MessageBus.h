@@ -4,7 +4,7 @@
 #include <vector>
 
 enum class MessageType {
-	MOVE_MODEL
+	ENTITY_MOVE, ENTITY_CENTER
 };
 
 struct Message {
@@ -15,9 +15,7 @@ struct Message {
 
 class MessageBus {
 	std::vector<Message> messages;
-	static MessageBus* singleton;
 public:
-	static MessageBus* getSingleton();
 	void addMessage(Message m);
 	void clearMessages();
 
