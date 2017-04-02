@@ -1,30 +1,20 @@
 #include "Input.h"
 
 #include <algorithm>
-#include <vector>
 #include <iostream>
 
-std::vector<int> keys_pressed;
-std::vector<int> keys_released;
-std::vector<int> keys_down;
+InputHandler* InputHandler::singleton;
 
-std::vector<SDL_Event> input_events;
-
-void input_add_key_event(SDL_Event e)
-{
-	input_events.push_back(e);
-}
-
-void update_input()
+void InputHandler::updateInput()
 {
 	keys_pressed.clear();
 	keys_released.clear();
 
 	for (auto e : input_events) {
 		int key = e.key.keysym.sym;
-		
+
 		if (e.type == SDL_KEYDOWN) {
-			if (!is_key_down(key)) {
+			if (!isKeyDown(key)) {
 				keys_pressed.push_back(key);
 			}
 			keys_down.push_back(key);
@@ -45,17 +35,22 @@ void update_input()
 #endif
 }
 
-bool is_key_down(int key)
+void InputHandler::addKeyEvent(SDL_Event e)
+{
+	input_events.push_back(e);
+}
+
+bool InputHandler::isKeyDown(int key)
 {
 	return std::find(keys_down.begin(), keys_down.end(), key) != keys_down.end();
 }
 
-bool is_key_pressed(int key)
+bool InputHandler::isKeyPressed(int key)
 {
 	return std::find(keys_pressed.begin(), keys_pressed.end(), key) != keys_pressed.end();
 }
 
-bool is_key_released(int key)
+bool InputHandler::isKeyReleased(int key)
 {
 	return std::find(keys_released.begin(), keys_released.end(), key) != keys_released.end();
 }

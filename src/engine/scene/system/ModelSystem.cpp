@@ -12,14 +12,22 @@ void ModelSystem::render(Renderer& renderer, Camera& camera, glm::mat4 proj_mat)
 	}
 }
 
-void ModelSystem::update()
+void ModelSystem::update(MessageBus& message_bus)
 {
-	std::vector<Message>& messages = MessageBus::getSingleton()->getMessages();
+	std::vector<Message>& messages = message_bus.getMessages();
 	for (auto& m : messages) {
-		if (m.type == MessageType::MOVE_MODEL) {
-			auto model = models.find(m.entity);
-			model->second.pos.x += m.arg1;
-			model->second.pos.y += m.arg2;
+		auto model = models.find(m.entity);
+		if (model == models.end()) continue;
+
+		switch (m.type) {
+			case MessageType::ENTITY_MOVE:
+				model->second.pos.x += m.arg1;
+				model->second.pos.y += m.arg2;
+				break;
+			case MessageType::ENTITY_CENTER:
+				model->second.pos.x = 0;
+				model->second.pos.y = 0;
+				break;
 		}
 	}
 }

@@ -14,6 +14,7 @@ struct Scene {
 	void addModelComponent(int id, Model& model);
 	void addInputComponent(int id);
 private:
+	MessageBus message_bus;
 	InputSystem input_system;
 	ModelSystem model_system;
 };

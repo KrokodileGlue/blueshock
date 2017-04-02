@@ -3,6 +3,7 @@
 
 #include "Model.h"
 #include "Renderer.h"
+#include "MessageBus.h"
 
 #include <map>
 
@@ -14,7 +15,7 @@ public:
 	}
 	
 	void render(Renderer& renderer, Camera& camera, glm::mat4 proj_mat);
-	void update();
+	void update(MessageBus& message_bus);
 };
 
 #endif

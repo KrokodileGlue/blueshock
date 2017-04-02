@@ -2,27 +2,33 @@
 #include "Input.h"
 #include "MessageBus.h"
 
-#define INPUT_SCALAR 0.05
+#define INPUT_SCALAR 0.25
 
-void InputSystem::update()
+void InputSystem::update(MessageBus& message_bus)
 {
-	if (is_key_down(SDLK_w) || is_key_down(SDLK_UP)) {
+	InputHandler* is = InputHandler::getSingleton();
+	if (is->isKeyDown(SDLK_w) || is->isKeyDown(SDLK_UP)) {
 		for (auto i : entities)
-			MessageBus::getSingleton()->addMessage({ i, 0.0, 1.0 * INPUT_SCALAR, MessageType::MOVE_MODEL });
+			message_bus.addMessage({ i, 0.0, 1.0 * INPUT_SCALAR, MessageType::ENTITY_MOVE });
 	}
 
-	if (is_key_down(SDLK_s) || is_key_down(SDLK_DOWN)) {
+	if (is->isKeyDown(SDLK_s) || is->isKeyDown(SDLK_DOWN)) {
 		for (auto i : entities)
-			MessageBus::getSingleton()->addMessage({ i, 0.0, -1.0 * INPUT_SCALAR, MessageType::MOVE_MODEL });
+			message_bus.addMessage({ i, 0.0, -1.0 * INPUT_SCALAR, MessageType::ENTITY_MOVE });
 	}
 
-	if (is_key_down(SDLK_a) || is_key_down(SDLK_LEFT)) {
+	if (is->isKeyDown(SDLK_a) || is->isKeyDown(SDLK_LEFT)) {
 		for (auto i : entities)
-			MessageBus::getSingleton()->addMessage({ i, 1.0 * INPUT_SCALAR, 0.0, MessageType::MOVE_MODEL });
+			message_bus.addMessage({ i, 1.0 * INPUT_SCALAR, 0.0, MessageType::ENTITY_MOVE });
 	}
 
-	if (is_key_down(SDLK_d) || is_key_down(SDLK_RIGHT)) {
+	if (is->isKeyDown(SDLK_d) || is->isKeyDown(SDLK_RIGHT)) {
 		for (auto i : entities)
-			MessageBus::getSingleton()->addMessage({ i, -1.0 * INPUT_SCALAR, 0.0, MessageType::MOVE_MODEL });
+			message_bus.addMessage({ i, -1.0 * INPUT_SCALAR, 0.0, MessageType::ENTITY_MOVE });
+	}
+
+	if (is->isKeyPressed(SDLK_SPACE)) {
+		for (auto i : entities)
+			message_bus.addMessage({ i, -1, -1, MessageType::ENTITY_CENTER });
 	}
 }
