@@ -39,6 +39,11 @@ int main(int argc, char* argv[])
 	glewExperimental = GL_TRUE;
 	glewInit();
 
+	GLint gl_version_major, gl_version_minor;
+	glGetIntegerv(GL_MAJOR_VERSION, &gl_version_major);
+	glGetIntegerv(GL_MINOR_VERSION, &gl_version_minor);
+	log(LogLevel::INFO) << "OpenGL version: " << std::to_string(int(gl_version_major)) << "." << std::to_string(int(gl_version_minor));
+
 	Shader vert_shader(GL_VERTEX_SHADER, "res/shader/vert.txt", "static vertex shader");
 	Shader frag_shader(GL_FRAGMENT_SHADER, "res/shader/frag.txt", "static fragment shader");
 	ShaderProgram shader_program(vert_shader, frag_shader);
