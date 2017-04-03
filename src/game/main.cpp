@@ -50,6 +50,7 @@ int main(int argc, char* argv[])
 	//model.scale = 0.25f;
 	//model.pos = glm::vec3(0, -1, 20);
 	//model.rot = glm::vec3(-90.0f, 0.0f, 0.0f);
+	model.rot = glm::vec3(0, 180, 0);
 
 	Scene scene;
 	scene.addModelComponent(0, model);

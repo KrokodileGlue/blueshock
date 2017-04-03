@@ -7,7 +7,7 @@ FrameBuffer::FrameBuffer(int width, int height, bool is_multisampled) :
 	height(height),
 	is_multisampled(is_multisampled)
 {
-	log(LogLevel::DEBUG1) << "creating a frame buffer object (" << width << ", " << height << "): is multisampled? " << (is_multisampled ? "yes" : "no");
+	log(LogLevel::INFO) << "creating a frame buffer object (" << width << ", " << height << "): is multisampled? " << (is_multisampled ? "yes" : "no");
 
 	glGenTextures(1, &texture_id);
 
@@ -51,13 +51,28 @@ FrameBuffer::FrameBuffer(int width, int height, bool is_multisampled) :
 	bool error_occurred = true;
 	GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	switch (status) {
-	case GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT: error_str = "GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT: at least one attachment point with a renderbuffer or texture attached has its attached object no longer in existence or has an attached image with a width or height of zero, or the color attachment point has a non-color-renderable image attached, or the depth attachment point has a non-depth-renderable image attached, or the stencil attachment point has a non-stencil-renderable image attached"; break;
-	case GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT: error_str = "GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT: not all attached images have the same width and height"; break;
-	case GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT: error_str = "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT: no images are attached to the framebuffer"; break;
-	case GL_FRAMEBUFFER_UNSUPPORTED: error_str = "GL_FRAMEBUFFER_UNSUPPORTED: the combination of internal formats of the attached images violates an implementation-dependent set of restrictions."; break;
-	case GL_FRAMEBUFFER_COMPLETE: error_str = "GL_FRAMEBUFFER_COMPLETE: no error"; error_occurred = false; break;
-	case GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE: error_str = "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE: the value of GL_RENDERBUFFER_SAMPLES is not the same for all attached renderbuffers; if the value of GL_TEXTURE_SAMPLES is the not same for all attached textures; or, if the attached images are a mix of renderbuffers and textures, the value of GL_RENDERBUFFER_SAMPLES does not match the value of GL_TEXTURE_SAMPLES"; break;
-	default: error_str = "unknown error: " + std::to_string(int(status)); break;
+	case GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
+		error_str = "GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT: at least one attachment point with a renderbuffer or texture attached has its attached object no longer in existence or has an attached image with a width or height of zero, or the color attachment point has a non-color-renderable image attached, or the depth attachment point has a non-depth-renderable image attached, or the stencil attachment point has a non-stencil-renderable image attached";
+		break;
+	case GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT:
+		error_str = "GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT: not all attached images have the same width and height";
+		break;
+	case GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
+		error_str = "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT: no images are attached to the framebuffer";
+		break;
+	case GL_FRAMEBUFFER_UNSUPPORTED:
+		error_str = "GL_FRAMEBUFFER_UNSUPPORTED: the combination of internal formats of the attached images violates an implementation-dependent set of restrictions.";
+		break;
+	case GL_FRAMEBUFFER_COMPLETE:
+		error_str = "GL_FRAMEBUFFER_COMPLETE: no error";
+		error_occurred = false;
+		break;
+	case GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE:
+		error_str = "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE: the value of GL_RENDERBUFFER_SAMPLES is not the same for all attached renderbuffers; if the value of GL_TEXTURE_SAMPLES is the not same for all attached textures; or, if the attached images are a mix of renderbuffers and textures, the value of GL_RENDERBUFFER_SAMPLES does not match the value of GL_TEXTURE_SAMPLES";
+		break;
+	default:
+		error_str = "unknown error: " + std::to_string(int(status));
+		break;
 	}
 
 	if (error_occurred)

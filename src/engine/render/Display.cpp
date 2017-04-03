@@ -14,8 +14,8 @@ Display::Display(int default_width, int default_height)
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	
-	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
-	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
+	//SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+	//SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
 
 	win = SDL_CreateWindow("blueshock", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		width, height,
@@ -24,7 +24,6 @@ Display::Display(int default_width, int default_height)
 	context = SDL_GL_CreateContext(win);
 	SDL_GL_SetSwapInterval(1);
 
-	glEnable(GL_MULTISAMPLE);
 	glEnable(GL_DEPTH_TEST);
 	glViewport(0, 0, width, height);
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
