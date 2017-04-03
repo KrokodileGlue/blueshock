@@ -55,7 +55,8 @@ int main(int argc, char* argv[])
 	scene.addModelComponent(0, model);
 	scene.addInputComponent(0);
 
-	FrameBuffer frame_buffer(display.width, display.height);
+	FrameBuffer multisampled_fbo(display.width, display.height, true);
+	FrameBuffer fbo(display.width, display.height, false);
 	QuadRenderer quad_renderer;
 
 	float time = 0.;
@@ -74,13 +75,17 @@ int main(int argc, char* argv[])
 		InputHandler::getSingleton()->updateInput();
 		scene.update();
 
-		if (was_window_resized)
-			frame_buffer.resize(display.width, display.height);
+		if (was_window_resized) {
+			multisampled_fbo.resize(display.width, display.height);
+			fbo.resize(display.width, display.height);
+		}
 
-		frame_buffer.bind();
+		multisampled_fbo.bind();
 		scene.render(renderer, camera, calc_projection_matrix(60.f, display.width, display.height));
-		frame_buffer.unbind();
-		quad_renderer.render(frame_buffer.getTexture());
+		multisampled_fbo.unbind();
+
+		fbo.blit(multisampled_fbo);
+		quad_renderer.render(fbo.getTexture());
 
 		time += 0.25f;
 	}
