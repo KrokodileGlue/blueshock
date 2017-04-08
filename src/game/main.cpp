@@ -19,7 +19,12 @@
 #include "FrameBuffer.h"
 #include "QuadRenderer.h"
 
+extern "C" {
+#include "lua.h"
+}
+
 #include "json.hpp"
+#include "selene.h"
 
 using nlohmann::json;
 
@@ -64,6 +69,9 @@ int main(int argc, char* argv[])
 	FrameBuffer multisampled_fbo(display.width, display.height, true);
 	FrameBuffer fbo(display.width, display.height, false);
 	QuadRenderer quad_renderer;
+
+	sel::State state {true};
+	state.Load("res/script/test.lua");
 
 	float time = 0.;
 	SDL_Event e;
