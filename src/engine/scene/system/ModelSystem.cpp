@@ -17,7 +17,8 @@ void ModelSystem::update(MessageBus& message_bus)
 	std::vector<Message>& messages = message_bus.getMessages();
 	for (auto& m : messages) {
 		auto model = models.find(m.entity);
-		if (model == models.end()) continue;
+		if (model == models.end()) continue; /* the entity does not have a model,
+		                                      * theoretically this should log a warning or something */
 
 		switch (m.type) {
 			case MessageType::ENTITY_MOVE:

@@ -1,1 +1,3 @@
-print("Hello, world!")
+function update()
+	print("updated!")
+end

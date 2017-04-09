@@ -18,6 +18,7 @@
 #include "Game.h"
 #include "FrameBuffer.h"
 #include "QuadRenderer.h"
+#include "ScriptSystem.h"
 
 extern "C" {
 #include "lua.h"
@@ -65,13 +66,11 @@ int main(int argc, char* argv[])
 	Scene scene;
 	scene.addModelComponent(0, model);
 	scene.addInputComponent(0);
+	scene.addScriptComponent(0, "res/script/test.lua");
 
 	FrameBuffer multisampled_fbo(display.width, display.height, true);
 	FrameBuffer fbo(display.width, display.height, false);
 	QuadRenderer quad_renderer;
-
-	sel::State state {true};
-	state.Load("res/script/test.lua");
 
 	float time = 0.;
 	SDL_Event e;
